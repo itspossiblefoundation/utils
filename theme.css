@@ -1,0 +1,218 @@
+@theme {
+    --color-foundation: hsl(348 66% 46%);
+    --color-foundation-light: hsl(348 56% 89%);
+    --color-foundation-foreground: var(--color-foundation-light);
+
+    --color-mortgage: hsl(14 73% 60%);
+    --color-mortgage-light: hsl(14 71% 92%);
+    --color-mortgage-foreground: var(--color-mortgage-light);
+
+    --color-hub: hsl(213 62% 48%);
+    --color-hub-light: hsl(218 51% 90%);
+    --color-hub-foreground: var(--color-hub-light);
+
+    --color-funding: hsl(274 54% 41%);
+    --color-funding-light: hsl(273 37% 88%);
+    --color-funding-foreground: var(--color-funding-light);
+
+    --color-service: hsl(113 27% 56%);
+    --color-service-light: hsl(115 27% 91%);
+    --color-service-foreground: var(--color-service-light);
+
+    --color-commercial: hsl(22 79% 32%);
+    --color-commercial-light: hsl(23 37% 86%);
+    --color-commercial-foreground: var(--color-commercial-light);
+
+    --color-partner: hsl(0 0% 50%);
+    --color-partner-light: hsl(0 0% 95%);
+    --color-partner-foreground: var(--color-partner-light);
+
+    --color-dark-gray: hsl(0 0% 18%);
+    --color-dark-gray-foreground: var(--color-light-gray);
+
+    --color-light-gray: hsl(0 0% 94%);
+    --color-light-gray-foreground: var(--color-dark-gray);
+
+    --color-indigo-accent: var(--color-indigo-600);
+    --color-indigo-accent-foreground: var(--color-indigo-100);
+
+    --color-foundation-50: color-mix(in hsl, var(--color-foundation) 55%, white);
+    --color-foundation-100: color-mix(in hsl, var(--color-foundation) 60%, white);
+    --color-foundation-150: color-mix(in hsl, var(--color-foundation) 65%, white);
+    --color-foundation-200: color-mix(in hsl, var(--color-foundation) 70%, white);
+    --color-foundation-250: color-mix(in hsl, var(--color-foundation) 75%, white);
+    --color-foundation-300: color-mix(in hsl, var(--color-foundation) 80%, white);
+    --color-foundation-350: color-mix(in hsl, var(--color-foundation) 85%, white);
+    --color-foundation-400: color-mix(in hsl, var(--color-foundation) 90%, white);
+    --color-foundation-450: color-mix(in hsl, var(--color-foundation) 95%, white);
+    --color-foundation-500: var(--color-foundation);
+    --color-foundation-550: color-mix(in hsl, var(--color-foundation) 95%, black);
+    --color-foundation-600: color-mix(in hsl, var(--color-foundation) 90%, black);
+    --color-foundation-650: color-mix(in hsl, var(--color-foundation) 85%, black);
+    --color-foundation-700: color-mix(in hsl, var(--color-foundation) 80%, black);
+    --color-foundation-750: color-mix(in hsl, var(--color-foundation) 75%, black);
+    --color-foundation-800: color-mix(in hsl, var(--color-foundation) 70%, black);
+    --color-foundation-850: color-mix(in hsl, var(--color-foundation) 65%, black);
+    --color-foundation-900: color-mix(in hsl, var(--color-foundation) 60%, black);
+    --color-foundation-950: color-mix(in hsl, var(--color-foundation) 55%, black);
+
+    --color-mortgage-50: color-mix(in hsl, var(--color-mortgage) 55%, white);
+    --color-mortgage-100: color-mix(in hsl, var(--color-mortgage) 60%, white);
+    --color-mortgage-150: color-mix(in hsl, var(--color-mortgage) 65%, white);
+    --color-mortgage-200: color-mix(in hsl, var(--color-mortgage) 70%, white);
+    --color-mortgage-250: color-mix(in hsl, var(--color-mortgage) 75%, white);
+    --color-mortgage-300: color-mix(in hsl, var(--color-mortgage) 80%, white);
+    --color-mortgage-350: color-mix(in hsl, var(--color-mortgage) 85%, white);
+    --color-mortgage-400: color-mix(in hsl, var(--color-mortgage) 90%, white);
+    --color-mortgage-450: color-mix(in hsl, var(--color-mortgage) 95%, white);
+    --color-mortgage-500: var(--color-mortgage);
+    --color-mortgage-550: color-mix(in hsl, var(--color-mortgage) 95%, black);
+    --color-mortgage-600: color-mix(in hsl, var(--color-mortgage) 90%, black);
+    --color-mortgage-650: color-mix(in hsl, var(--color-mortgage) 85%, black);
+    --color-mortgage-700: color-mix(in hsl, var(--color-mortgage) 80%, black);
+    --color-mortgage-750: color-mix(in hsl, var(--color-mortgage) 75%, black);
+    --color-mortgage-800: color-mix(in hsl, var(--color-mortgage) 70%, black);
+    --color-mortgage-850: color-mix(in hsl, var(--color-mortgage) 65%, black);
+    --color-mortgage-900: color-mix(in hsl, var(--color-mortgage) 60%, black);
+    --color-mortgage-950: color-mix(in hsl, var(--color-mortgage) 55%, black);
+
+    --color-hub-50: color-mix(in hsl, var(--color-hub) 55%, white);
+    --color-hub-100: color-mix(in hsl, var(--color-hub) 60%, white);
+    --color-hub-150: color-mix(in hsl, var(--color-hub) 65%, white);
+    --color-hub-200: color-mix(in hsl, var(--color-hub) 70%, white);
+    --color-hub-250: color-mix(in hsl, var(--color-hub) 75%, white);
+    --color-hub-300: color-mix(in hsl, var(--color-hub) 80%, white);
+    --color-hub-350: color-mix(in hsl, var(--color-hub) 85%, white);
+    --color-hub-400: color-mix(in hsl, var(--color-hub) 90%, white);
+    --color-hub-450: color-mix(in hsl, var(--color-hub) 95%, white);
+    --color-hub-500: var(--color-hub);
+    --color-hub-550: color-mix(in hsl, var(--color-hub) 95%, black);
+    --color-hub-600: color-mix(in hsl, var(--color-hub) 90%, black);
+    --color-hub-650: color-mix(in hsl, var(--color-hub) 85%, black);
+    --color-hub-700: color-mix(in hsl, var(--color-hub) 80%, black);
+    --color-hub-750: color-mix(in hsl, var(--color-hub) 75%, black);
+    --color-hub-800: color-mix(in hsl, var(--color-hub) 70%, black);
+    --color-hub-850: color-mix(in hsl, var(--color-hub) 65%, black);
+    --color-hub-900: color-mix(in hsl, var(--color-hub) 60%, black);
+    --color-hub-950: color-mix(in hsl, var(--color-hub) 55%, black);
+
+    --color-funding-50: color-mix(in hsl, var(--color-funding) 55%, white);
+    --color-funding-100: color-mix(in hsl, var(--color-funding) 60%, white);
+    --color-funding-150: color-mix(in hsl, var(--color-funding) 65%, white);
+    --color-funding-200: color-mix(in hsl, var(--color-funding) 70%, white);
+    --color-funding-250: color-mix(in hsl, var(--color-funding) 75%, white);
+    --color-funding-300: color-mix(in hsl, var(--color-funding) 80%, white);
+    --color-funding-350: color-mix(in hsl, var(--color-funding) 85%, white);
+    --color-funding-400: color-mix(in hsl, var(--color-funding) 90%, white);
+    --color-funding-450: color-mix(in hsl, var(--color-funding) 95%, white);
+    --color-funding-500: var(--color-funding);
+    --color-funding-550: color-mix(in hsl, var(--color-funding) 95%, black);
+    --color-funding-600: color-mix(in hsl, var(--color-funding) 90%, black);
+    --color-funding-650: color-mix(in hsl, var(--color-funding) 85%, black);
+    --color-funding-700: color-mix(in hsl, var(--color-funding) 80%, black);
+    --color-funding-750: color-mix(in hsl, var(--color-funding) 75%, black);
+    --color-funding-800: color-mix(in hsl, var(--color-funding) 70%, black);
+    --color-funding-850: color-mix(in hsl, var(--color-funding) 65%, black);
+    --color-funding-900: color-mix(in hsl, var(--color-funding) 60%, black);
+    --color-funding-950: color-mix(in hsl, var(--color-funding) 55%, black);
+
+    --color-service-50: color-mix(in hsl, var(--color-service) 55%, white);
+    --color-service-100: color-mix(in hsl, var(--color-service) 60%, white);
+    --color-service-150: color-mix(in hsl, var(--color-service) 65%, white);
+    --color-service-200: color-mix(in hsl, var(--color-service) 70%, white);
+    --color-service-250: color-mix(in hsl, var(--color-service) 75%, white);
+    --color-service-300: color-mix(in hsl, var(--color-service) 80%, white);
+    --color-service-350: color-mix(in hsl, var(--color-service) 85%, white);
+    --color-service-400: color-mix(in hsl, var(--color-service) 90%, white);
+    --color-service-450: color-mix(in hsl, var(--color-service) 95%, white);
+    --color-service-500: var(--color-service);
+    --color-service-550: color-mix(in hsl, var(--color-service) 95%, black);
+    --color-service-600: color-mix(in hsl, var(--color-service) 90%, black);
+    --color-service-650: color-mix(in hsl, var(--color-service) 85%, black);
+    --color-service-700: color-mix(in hsl, var(--color-service) 80%, black);
+    --color-service-750: color-mix(in hsl, var(--color-service) 75%, black);
+    --color-service-800: color-mix(in hsl, var(--color-service) 70%, black);
+    --color-service-850: color-mix(in hsl, var(--color-service) 65%, black);
+    --color-service-900: color-mix(in hsl, var(--color-service) 60%, black);
+    --color-service-950: color-mix(in hsl, var(--color-service) 55%, black);
+
+    --color-commercial-50: color-mix(in hsl, var(--color-commercial) 55%, white);
+    --color-commercial-100: color-mix(in hsl, var(--color-commercial) 60%, white);
+    --color-commercial-150: color-mix(in hsl, var(--color-commercial) 65%, white);
+    --color-commercial-200: color-mix(in hsl, var(--color-commercial) 70%, white);
+    --color-commercial-250: color-mix(in hsl, var(--color-commercial) 75%, white);
+    --color-commercial-300: color-mix(in hsl, var(--color-commercial) 80%, white);
+    --color-commercial-350: color-mix(in hsl, var(--color-commercial) 85%, white);
+    --color-commercial-400: color-mix(in hsl, var(--color-commercial) 90%, white);
+    --color-commercial-450: color-mix(in hsl, var(--color-commercial) 95%, white);
+    --color-commercial-500: var(--color-commercial);
+    --color-commercial-550: color-mix(in hsl, var(--color-commercial) 95%, black);
+    --color-commercial-600: color-mix(in hsl, var(--color-commercial) 90%, black);
+    --color-commercial-650: color-mix(in hsl, var(--color-commercial) 85%, black);
+    --color-commercial-700: color-mix(in hsl, var(--color-commercial) 80%, black);
+    --color-commercial-750: color-mix(in hsl, var(--color-commercial) 75%, black);
+    --color-commercial-800: color-mix(in hsl, var(--color-commercial) 70%, black);
+    --color-commercial-850: color-mix(in hsl, var(--color-commercial) 65%, black);
+    --color-commercial-900: color-mix(in hsl, var(--color-commercial) 60%, black);
+    --color-commercial-950: color-mix(in hsl, var(--color-commercial) 55%, black);
+
+    --color-partner-50: color-mix(in hsl, var(--color-partner) 55%, white);
+    --color-partner-100: color-mix(in hsl, var(--color-partner) 60%, white);
+    --color-partner-150: color-mix(in hsl, var(--color-partner) 65%, white);
+    --color-partner-200: color-mix(in hsl, var(--color-partner) 70%, white);
+    --color-partner-250: color-mix(in hsl, var(--color-partner) 75%, white);
+    --color-partner-300: color-mix(in hsl, var(--color-partner) 80%, white);
+    --color-partner-350: color-mix(in hsl, var(--color-partner) 85%, white);
+    --color-partner-400: color-mix(in hsl, var(--color-partner) 90%, white);
+    --color-partner-450: color-mix(in hsl, var(--color-partner) 95%, white);
+    --color-partner-500: var(--color-partner);
+    --color-partner-550: color-mix(in hsl, var(--color-partner) 95%, black);
+    --color-partner-600: color-mix(in hsl, var(--color-partner) 90%, black);
+    --color-partner-650: color-mix(in hsl, var(--color-partner) 85%, black);
+    --color-partner-700: color-mix(in hsl, var(--color-partner) 80%, black);
+    --color-partner-750: color-mix(in hsl, var(--color-partner) 75%, black);
+    --color-partner-800: color-mix(in hsl, var(--color-partner) 70%, black);
+    --color-partner-850: color-mix(in hsl, var(--color-partner) 65%, black);
+    --color-partner-900: color-mix(in hsl, var(--color-partner) 60%, black);
+    --color-partner-950: color-mix(in hsl, var(--color-partner) 55%, black);
+
+    --color-dark-50: color-mix(in hsl, var(--color-dark-gray) 55%, white);
+    --color-dark-100: color-mix(in hsl, var(--color-dark-gray) 60%, white);
+    --color-dark-150: color-mix(in hsl, var(--color-dark-gray) 65%, white);
+    --color-dark-200: color-mix(in hsl, var(--color-dark-gray) 70%, white);
+    --color-dark-250: color-mix(in hsl, var(--color-dark-gray) 75%, white);
+    --color-dark-300: color-mix(in hsl, var(--color-dark-gray) 80%, white);
+    --color-dark-350: color-mix(in hsl, var(--color-dark-gray) 85%, white);
+    --color-dark-400: color-mix(in hsl, var(--color-dark-gray) 90%, white);
+    --color-dark-450: color-mix(in hsl, var(--color-dark-gray) 95%, white);
+    --color-dark-500: var(--color-dark-gray);
+    --color-dark-550: color-mix(in hsl, var(--color-dark-gray) 95%, black);
+    --color-dark-600: color-mix(in hsl, var(--color-dark-gray) 90%, black);
+    --color-dark-650: color-mix(in hsl, var(--color-dark-gray) 85%, black);
+    --color-dark-700: color-mix(in hsl, var(--color-dark-gray) 80%, black);
+    --color-dark-750: color-mix(in hsl, var(--color-dark-gray) 75%, black);
+    --color-dark-800: color-mix(in hsl, var(--color-dark-gray) 70%, black);
+    --color-dark-850: color-mix(in hsl, var(--color-dark-gray) 65%, black);
+    --color-dark-900: color-mix(in hsl, var(--color-dark-gray) 60%, black);
+    --color-dark-950: color-mix(in hsl, var(--color-dark-gray) 55%, black);
+
+    --color-light-50: color-mix(in hsl, var(--color-light-gray) 95%, white);
+    --color-light-100: var(--color-light-gray);
+    --color-light-150: color-mix(in hsl, var(--color-light-gray) 95%, black);
+    --color-light-200: color-mix(in hsl, var(--color-light-gray) 90%, black);
+    --color-light-250: color-mix(in hsl, var(--color-light-gray) 85%, black);
+    --color-light-300: color-mix(in hsl, var(--color-light-gray) 80%, black);
+    --color-light-350: color-mix(in hsl, var(--color-light-gray) 75%, black);
+    --color-light-400: color-mix(in hsl, var(--color-light-gray) 70%, black);
+    --color-light-450: color-mix(in hsl, var(--color-light-gray) 65%, black);
+    --color-light-500: color-mix(in hsl, var(--color-light-gray) 60%, black);
+    --color-light-550: color-mix(in hsl, var(--color-light-gray) 55%, black);
+    --color-light-600: color-mix(in hsl, var(--color-light-gray) 50%, black);
+    --color-light-650: color-mix(in hsl, var(--color-light-gray) 45%, black);
+    --color-light-700: color-mix(in hsl, var(--color-light-gray) 40%, black);
+    --color-light-750: color-mix(in hsl, var(--color-light-gray) 35%, black);
+    --color-light-800: color-mix(in hsl, var(--color-light-gray) 30%, black);
+    --color-light-850: color-mix(in hsl, var(--color-light-gray) 25%, black);
+    --color-light-900: color-mix(in hsl, var(--color-light-gray) 20%, black);
+    --color-light-950: color-mix(in hsl, var(--color-light-gray) 15%, black);
+}
