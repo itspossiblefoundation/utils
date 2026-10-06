@@ -80,7 +80,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -f ".cleanup.sh" ]];
+if [[ -f ".cleanup.sh" ]]; then
   rm ".cleanup.sh"
 fi
 
