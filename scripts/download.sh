@@ -1,12 +1,13 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.5"
+SCRIPT_VERSION="v0.2.6"
 
 URL=""
 SKIP_REFRESH=false
 DIRECTORY="remote_resources"
 RENAME="latest"
 ENV_KEY="REMOTE_REPO"
+SYM_LINK_JS="external"
 POSITIONAL_ARGS=()
 
 function version() {
@@ -28,6 +29,7 @@ Rename output folder#-r#--rename#Relative to remote directory#"latest"
 Key to load repository URL from in .env#-e#--env-key#Key name#"REMOTE_REPO"
 Refresh download script#-f#--refresh#(none)#Default behaviour
 Skip refreshing download script#-s#--skip-refresh#(none)#false
+Symlink JS#-l#--link#Link name#"external"
 EOF
 }
 
@@ -67,6 +69,11 @@ while [[ $# -gt 0 ]]; do
       ;;
     -f|--refresh)
       SKIP_REFRESH=false
+      shift
+      ;;
+    -l|--link)
+      SYM_LINK_JS="$2"
+      shift
       shift
       ;;
     -*|--*)
@@ -126,9 +133,12 @@ fi
 mv $DIRECTORY/$name $DIRECTORY/$RENAME
 rm "$DIRECTORY/remote.zip"
 
-for f in $DIRECTORY/$RENAME/js/*; do
-  ln -s $f resources/js$(basename $f)
-done
+script_dir="$(pwd)"
+cd ./resources/js
+
+ln -s -f "$script_dir/$DIRECTORY/$RENAME/js" "$SYM_LINK_JS"
+
+cd "$script_dir"
 
 if [[ "$SKIP_REFRESH" == "false" ]]; then
   ver="$(bash $DIRECTORY/$RENAME/scripts/download.sh --version)"
