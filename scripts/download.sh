@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.6"
+SCRIPT_VERSION="v0.2.7"
 
 URL=""
 SKIP_REFRESH=false
@@ -133,12 +133,18 @@ fi
 mv $DIRECTORY/$name $DIRECTORY/$RENAME
 rm "$DIRECTORY/remote.zip"
 
-script_dir="$(pwd)"
-cd ./resources/js
+if [[ -d "./resources/js/$SYM_LINK_JS" ]]; then
+    rm -rf "./resources/js/$SYM_LINK_JS"
+fi
 
-ln -s -f "$script_dir/$DIRECTORY/$RENAME/js" "$SYM_LINK_JS"
+mkdir -p "./resources/js/$SYM_LINK_JS"
+echo "*" > "./resources/js/$SYM_LINK_JS/.gitignore"
 
-cd "$script_dir"
+for f in $(pwd)/$DIRECTORY/$RENAME/js/*; do
+    file="$(basename $f)"
+    ln -s "$f" "./resources/js/$SYM_LINK_JS/$file"
+done
+
 
 if [[ "$SKIP_REFRESH" == "false" ]]; then
   ver="$(bash $DIRECTORY/$RENAME/scripts/download.sh --version)"
