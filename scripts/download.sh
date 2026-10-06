@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.4"
+SCRIPT_VERSION="v0.2.5"
 
 URL=""
 SKIP_REFRESH=false
@@ -125,6 +125,10 @@ fi
 
 mv $DIRECTORY/$name $DIRECTORY/$RENAME
 rm "$DIRECTORY/remote.zip"
+
+for f in $DIRECTORY/$RENAME/js/*; do
+  ln -s $f resources/js$(basename $f)
+done
 
 if [[ "$SKIP_REFRESH" == "false" ]]; then
   ver="$(bash $DIRECTORY/$RENAME/scripts/download.sh --version)"
