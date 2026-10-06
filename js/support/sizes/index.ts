@@ -1,4 +1,4 @@
-import {Size, BaseSizeLoader} from "@/support/sizes/size";
+import {Size, BaseSizeLoader} from "./size";
 import ButtonSizes from "./button"
 
 export type {Size, BaseSizeLoader}

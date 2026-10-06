@@ -1,4 +1,4 @@
-import {AbstractStyle, BaseStyleLoader} from "@/support/styles/style";
+import {AbstractStyle, BaseStyleLoader} from "./style";
 
 export class DefaultStyle extends AbstractStyle {
     color(): string {

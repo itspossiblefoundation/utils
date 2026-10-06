@@ -1,7 +1,7 @@
-import {Style, BaseStyleLoader} from "@/support/styles/style";
-import IPF from "@/support/styles/ipf";
-import Tailwind from "@/support/styles/tailwind";
-import BaseStyles from "@/support/styles/base"
+import {Style, BaseStyleLoader} from "./style";
+import IPF from "./ipf";
+import Tailwind from "./tailwind";
+import BaseStyles from "./base"
 
 export type {Style, BaseStyleLoader}
 

@@ -5,7 +5,7 @@ import {
     ForegroundBorderColor,
     ForegroundColor, ForegroundFillColor, ForegroundTextColor,
     TextColor
-} from "@/support/styles/color";
+} from "./color";
 
 export interface Style {
     bg: BackgroundColor

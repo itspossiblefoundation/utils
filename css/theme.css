@@ -33,8 +33,8 @@
     --color-light-gray: hsl(0 0% 94%);
     --color-light-gray-foreground: var(--color-dark-gray);
 
-    --color-indigo-accent: var(--color-indigo-600);
-    --color-indigo-accent-foreground: var(--color-indigo-100);
+    --color-indigo-accent: oklch(0.511 0.262 276.966);
+    --color-indigo-accent-foreground: oklch(0.93 0.034 272.788);
 
     --color-foundation-50: color-mix(in hsl, var(--color-foundation) 55%, white);
     --color-foundation-100: color-mix(in hsl, var(--color-foundation) 60%, white);

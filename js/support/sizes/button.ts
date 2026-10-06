@@ -1,4 +1,4 @@
-import {AbstractSize, BaseSizeLoader} from "@/support/sizes/size";
+import {AbstractSize, BaseSizeLoader} from "./size";
 
 export class XSmall extends AbstractSize {
     text: string = 'text-xs'
