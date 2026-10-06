@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPT_VERSION="v0.2.1"
+SCRIPT_VERSION="v0.2.2"
 
 URL=""
 SKIP_REFRESH=false
