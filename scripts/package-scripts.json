@@ -1,0 +1,11 @@
+{
+  "scripts": {
+        "download": "bash download.sh",
+        "build": "npm run download && vp build",
+        "build:ssr": "npm run download && vp build && vp build --ssr",
+        "dev": "npm run download && vp dev",
+        "check": "vp check",
+        "check:fix": "vp check --fix",
+        "types:check": "vue-tsc --noEmit"
+    }
+}
