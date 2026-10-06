@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-SCRIPT_VERSION="v0.2.3"
+SCRIPT_VERSION="v0.2.4"
 
 URL=""
 SKIP_REFRESH=false
@@ -129,15 +129,12 @@ rm "$DIRECTORY/remote.zip"
 if [[ "$SKIP_REFRESH" == "false" ]]; then
   ver="$(bash $DIRECTORY/$RENAME/scripts/download.sh --version)"
   if [[ "$ver" != "$SCRIPT_VERSION" ]]; then
-    cat > .cleanup.sh <<EOF
-#!/bin/bash
-
-rm download.sh
-cp $DIRECTORY/$RENAME/scripts/download.sh download.sh
-exit 0
-EOF
-
-    bash .cleanup.sh &
+    echo "#!/bin/bash" > .cleanup.sh
+    echo "rm download.sh" >> .cleanup.sh
+    echo "cp \"$DIRECTORY/$RENAME/scripts/download.sh\" \"download.sh\"" >> .cleanup.sh
+    echo "rm \".cleanup.sh\" & disown" >> .cleanup.sh
+    echo "exit 0" >> .cleanup.sh
+    bash .cleanup.sh & disown
   fi
 fi
 
