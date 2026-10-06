@@ -31,6 +31,10 @@ curl -sL "$repo" | grep "zipball_url" | cut -d ':' -f2-3 | tr -d '", ' | wget -q
 name="$(unzip -l 'remote_resources/remote.zip' | grep -v 'Archive' | grep / | head -n1 | sed -e 's/^[ \t]*//g' | tr -s '[:space:]' | cut -d ' ' -f4 | cut -d '/' -f1)"
 unzip -q -o "remote_resources/remote.zip" -d "remote_resources"
 
+if [[ -d "remote_resources/latest" ]]; then
+    rm -rf "remote_resources/latest"
+fi
+
 mv remote_resources/$name remote_resources/latest
 rm "remote_resources/remote.zip"
 
