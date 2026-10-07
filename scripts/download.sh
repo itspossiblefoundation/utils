@@ -1,12 +1,14 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.7"
+SCRIPT_VERSION="v0.2.8"
 
 URL=""
 SKIP_REFRESH=false
 DIRECTORY="remote_resources"
 RENAME="latest"
-ENV_KEY="REMOTE_REPO"
+REMOTE_REPO_KEY="REMOTE_REPO"
+USE_SHARED_KEY="REMOTE_USE_SHARED"
+SHARED_FOLDER_KEY="REMOTE_SHARED_FOLDER"
 SYM_LINK_JS="external"
 POSITIONAL_ARGS=()
 
@@ -32,6 +34,67 @@ Skip refreshing download script#-s#--skip-refresh#(none)#false
 Symlink JS#-l#--link#Link name#"external"
 EOF
 }
+
+function get-env() {
+  cat .env | grep "$1" | cut -f2- -d '='
+}
+
+function has-env() {
+  if [[ "$(cat .env | grep "$1")" == "" ]]; then
+    echo 0
+  else
+    echo 1
+  fi
+}
+
+function download() {
+  if [[ "$URL" == "" ]]; then
+    if [[ $(has-env "$REMOTE_REPO_KEY") == 0 ]]; then
+        echo "Add $REMOTE_REPO_KEY to .env"
+        exit 1
+    fi
+
+    repo="$(get-env "$REMOTE_REPO_KEY")"
+
+    if [[ "$repo" == "" ]]; then
+        echo "$REMOTE_REPO_KEY in .env not set!"
+        exit 1
+    fi
+  else
+    repo="$URL"
+  fi
+
+  curl -sL "$repo" | grep "zipball_url" | cut -d ':' -f2-3 | tr -d '", ' | wget -q -O "$DIRECTORY/remote.zip" -i -
+
+  name="$(unzip -l "$DIRECTORY/remote.zip" | grep -v 'Archive' | grep / | head -n1 | sed -e 's/^[ \t]*//g' | tr -s '[:space:]' | cut -d ' ' -f4 | cut -d '/' -f1)"
+  unzip -q -o "$DIRECTORY/remote.zip" -d "$DIRECTORY"
+
+  if [[ -d $DIRECTORY/$RENAME ]]; then
+      rm -rf "$DIRECTORY/$RENAME"
+  fi
+
+  mv $DIRECTORY/$name $DIRECTORY/$RENAME
+  rm "$DIRECTORY/remote.zip"
+}
+
+function link-shared() {
+  if [[ $(has-env "$SHARED_FOLDER_KEY") == 0 ]]; then
+    echo "Cannot find $SHARED_FOLDER_KEY in .env and trying to use shared folder."
+    exit 1
+  fi
+
+  folder="$(get-env "$SHARED_FOLDER_KEY")"
+
+  if [[ ! -d "$folder" ]]; then
+    echo "$folder does not exist."
+    exit 1
+  fi
+
+  rm -rf "./$DIRECTORY/$RENAME"
+
+  ln -s "$(realpath $folder)" "./$DIRECTORY/$RENAME"
+}
+
 
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -59,7 +122,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     -e|--env-key)
-      ENV_KEY="$2"
+      REMOTE_REPO_KEY="$2"
       shift
       shift
       ;;
@@ -105,33 +168,11 @@ if [[ ! -d "$DIRECTORY" ]]; then
     fi
 fi
 
-if [[ "$URL" == "" ]]; then
-  if [[ "$(cat .env | grep "$ENV_KEY")" == "" ]]; then
-      echo "Add $ENV_KEY to .env"
-      exit 1
-  fi
-
-  repo="$(cat .env | grep "$ENV_KEY" | cut -f2- -d '=')"
-
-  if [[ "$repo" == "" ]]; then
-      echo "$ENV_KEY in .env not set!"
-      exit 1
-  fi
+if [[ "$(get-env "$USE_SHARED_KEY")" == "true" ]]; then
+  link-shared
 else
-  repo="$URL"
+  download
 fi
-
-curl -sL "$repo" | grep "zipball_url" | cut -d ':' -f2-3 | tr -d '", ' | wget -q -O "$DIRECTORY/remote.zip" -i -
-
-name="$(unzip -l "$DIRECTORY/remote.zip" | grep -v 'Archive' | grep / | head -n1 | sed -e 's/^[ \t]*//g' | tr -s '[:space:]' | cut -d ' ' -f4 | cut -d '/' -f1)"
-unzip -q -o "$DIRECTORY/remote.zip" -d "$DIRECTORY"
-
-if [[ -d "$DIRECTORY/$RENAME" ]]; then
-    rm -rf "$DIRECTORY/$RENAME"
-fi
-
-mv $DIRECTORY/$name $DIRECTORY/$RENAME
-rm "$DIRECTORY/remote.zip"
 
 if [[ -d "./resources/js/$SYM_LINK_JS" ]]; then
     rm -rf "./resources/js/$SYM_LINK_JS"

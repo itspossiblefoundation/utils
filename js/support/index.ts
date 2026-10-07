@@ -1,5 +1,8 @@
-import {StyleLoader, default as Style} from "./styles";
-import {SizeLoader, default as Size} from "./sizes";
+import {StyleLoader, Style, default as Styles} from "./styles";
+import {SizeLoader, Size, default as Sizes} from "./sizes";
+
+export type {StyleLoader, SizeLoader}
+export type {Style, Size}
 
 export type SupportLoader = {
     size: SizeLoader,
@@ -7,8 +10,8 @@ export type SupportLoader = {
 }
 
 export const Loader: SupportLoader = {
-    size: Size,
-    style: Style,
+    size: Sizes,
+    style: Styles,
 }
 
 export default Loader
