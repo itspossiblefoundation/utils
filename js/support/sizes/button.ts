@@ -1,4 +1,5 @@
-import {AbstractSize, GenericSizeLoader, Size} from "./size";
+import {AbstractSize, Size} from "./size";
+import {Loader} from "../loader";
 
 export class XSmall extends AbstractSize {
     text: string = 'text-xs'
@@ -55,7 +56,7 @@ export enum ButtonSizes {
     XXXLarge = 'XXXLarge',
 }
 
-export class ButtonSizeLoader implements GenericSizeLoader<ButtonSizes> {
+export class ButtonSizeLoader implements Loader<ButtonSizes, Size> {
     Default: Size = new Medium
     XSmall: Size = new XSmall
     Small: Size = new Small

@@ -1,4 +1,5 @@
-import {AbstractStyle, GenericStyleLoader, Style} from "./style";
+import {AbstractStyle, Style} from "./style";
+import {Loader} from "../loader";
 
 export class Foundation extends AbstractStyle {
     color(): string {
@@ -114,7 +115,7 @@ export enum IPFStyles {
 }
 
 
-export class IPFStyleLoader implements GenericStyleLoader<IPFStyles> {
+export class IPFStyleLoader implements Loader<IPFStyles, Style> {
     Foundation: Style = new Foundation
     Mortgage: Style = new Mortgage
     Hub: Style = new Hub

@@ -1,12 +1,12 @@
-import {Size, GenericSizeLoader} from "./size";
+import {Size} from "./size";
 import * as Button from './button'
+import {Loader} from "../loader";
 
-export type {Size, GenericSizeLoader}
+export type {Size}
 
 const Sizes = {...Button.ButtonSizes}
-type AllSizes = keyof typeof Sizes
 
-export class SizeLoader implements GenericSizeLoader<AllSizes> {
+export class SizeLoader implements Loader<keyof typeof Sizes, Size> {
     Default: Size = new Button.Medium
     XSmall: Size = new Button.XSmall
     Small: Size = new Button.Small

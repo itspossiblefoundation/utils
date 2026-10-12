@@ -1,4 +1,5 @@
-import {AbstractStyle, GenericStyleLoader, Style} from "./style";
+import {AbstractStyle, Style} from "./style";
+import {Loader} from "../loader";
 
 export class Red extends AbstractStyle {
     color(): string {
@@ -278,7 +279,7 @@ export enum TailwindStyles {
     Olive = 'Olive',
 }
 
-export class TailwindStyleLoader implements GenericStyleLoader<TailwindStyles> {
+export class TailwindStyleLoader implements Loader<TailwindStyles, Style> {
     Red: Style = new Red
     Orange: Style = new Orange
     Amber: Style = new Amber

@@ -1,18 +1,14 @@
-import {Style, GenericStyleLoader} from "./style";
+import {Style} from "./style";
 import * as Base from "./base"
 import * as IPF from "./ipf";
 import * as Tailwind from "./tailwind";
+import {Loader} from "../loader";
 
-export type {Style, GenericStyleLoader}
-
-// export type StyleLoader = {
-//     [style in (keyof typeof BaseStyles) | (keyof typeof IPF) | (keyof typeof Tailwind)]: Style
-// }
+export type {Style}
 
 const Styles = {...Base.BaseStyles, ...Tailwind.TailwindStyles, ...IPF.IPFStyles}
-type AllStyles = keyof typeof Styles
 
-export class StyleLoader implements GenericStyleLoader<AllStyles> {
+export class StyleLoader implements Loader<keyof typeof Styles, Style> {
     Foundation: Style = new IPF.Foundation
     Mortgage: Style = new IPF.Mortgage
     Hub: Style = new IPF.Hub
