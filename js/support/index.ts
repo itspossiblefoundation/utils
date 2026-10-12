@@ -15,4 +15,6 @@ export class SupportLoader implements Loader<'Size' | 'Style', SizeLoader | Styl
     Style: StyleLoader = new StyleLoader
 }
 
-export default new SupportLoader
+export const load: SupportLoader = new SupportLoader
+
+export default load
