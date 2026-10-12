@@ -1,4 +1,4 @@
-import {AbstractStyle, BaseStyleLoader} from "./style";
+import {AbstractStyle, GenericStyleLoader, Style} from "./style";
 
 export class DefaultStyle extends AbstractStyle {
     color(): string {
@@ -20,7 +20,14 @@ export class White extends AbstractStyle {
     }
 }
 
-export default {
-    Default: new DefaultStyle,
-    White: new White,
-} satisfies BaseStyleLoader
+export enum BaseStyles {
+    Default = 'Default',
+    White = 'White',
+}
+
+export class BaseStyleLoader implements GenericStyleLoader<BaseStyles> {
+    Default: Style = new DefaultStyle
+    White: Style = new White
+}
+
+export default new BaseStyleLoader

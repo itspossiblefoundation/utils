@@ -216,3 +216,5 @@
     --color-light-900: color-mix(in hsl, var(--color-light-gray) 20%, black);
     --color-light-950: color-mix(in hsl, var(--color-light-gray) 15%, black);
 }
+
+@source '../js/**/*.ts';

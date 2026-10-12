@@ -1,4 +1,4 @@
-import {AbstractStyle, BaseStyleLoader} from "./style";
+import {AbstractStyle, GenericStyleLoader, Style} from "./style";
 
 export class Foundation extends AbstractStyle {
     color(): string {
@@ -100,15 +100,31 @@ export class Indigo extends AbstractStyle {
     }
 }
 
-export default {
-    Foundation: new Foundation,
-    Mortgage: new Mortgage,
-    Hub: new Hub,
-    Funding: new Funding,
-    Service: new Service,
-    Commercial: new Commercial,
-    Partner: new Partner,
-    Dark: new Dark,
-    Light: new Light,
-    Indigo: new Indigo,
-} satisfies BaseStyleLoader
+export enum IPFStyles {
+    Foundation = 'Foundation',
+    Mortgage = 'Mortgage',
+    Hub = 'Hub',
+    Funding = 'Funding',
+    Service = 'Service',
+    Commercial = 'Commercial',
+    Partner = 'Partner',
+    Dark = 'Dark',
+    Light = 'Light',
+    Indigo = 'Indigo'
+}
+
+
+export class IPFStyleLoader implements GenericStyleLoader<IPFStyles> {
+    Foundation: Style = new Foundation
+    Mortgage: Style = new Mortgage
+    Hub: Style = new Hub
+    Funding: Style = new Funding
+    Service: Style = new Service
+    Commercial: Style = new Commercial
+    Partner: Style = new Partner
+    Dark: Style = new Dark
+    Light: Style = new Light
+    Indigo: Style = new Indigo
+}
+
+export default new IPFStyleLoader

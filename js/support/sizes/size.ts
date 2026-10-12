@@ -5,8 +5,8 @@ export interface Size {
     border: string
 }
 
-export type BaseSizeLoader = {
-    [key: string]: Size
+export type GenericSizeLoader<T extends string | number | symbol> = {
+    [key in T]: Size
 }
 
 export abstract class AbstractSize implements Size {

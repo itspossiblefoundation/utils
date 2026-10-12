@@ -1,17 +1,21 @@
-import {StyleLoader, Style, default as Styles} from "./styles";
-import {SizeLoader, Size, default as Sizes} from "./sizes";
+import {Style, StyleLoader, GenericStyleLoader} from "./styles";
+import {Size, SizeLoader, GenericSizeLoader} from "./sizes";
+import {IPFStyles} from "./styles/ipf";
+import {BaseStyles} from "./styles/base";
+import {TailwindStyles} from "./styles/tailwind";
+import {ButtonSizes} from "./sizes/button";
 
-export type {StyleLoader, SizeLoader}
-export type {Style, Size}
+export type {Style, StyleLoader, GenericStyleLoader, IPFStyles, BaseStyles, TailwindStyles}
+export type {Size, SizeLoader, GenericSizeLoader, ButtonSizes}
 
-export type SupportLoader = {
-    size: SizeLoader,
-    style: StyleLoader
+export type Support = {
+    Size: SizeLoader
+    Style: StyleLoader
 }
 
-export const Loader: SupportLoader = {
-    size: Sizes,
-    style: Styles,
+export class SupportLoader implements Support {
+    Size: SizeLoader = new SizeLoader
+    Style: StyleLoader = new StyleLoader
 }
 
-export default Loader
+export default new SupportLoader

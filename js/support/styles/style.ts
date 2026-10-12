@@ -24,9 +24,9 @@ export interface Style {
     style(): string
 }
 
-export interface BaseStyleLoader {
-    [key: string]: Style
-}
+export type GenericStyleLoader<T extends string | number | symbol> = {
+    [key in T]: Style;
+};
 
 export abstract class AbstractStyle implements Style {
     bg: BackgroundColor = new BackgroundColor()

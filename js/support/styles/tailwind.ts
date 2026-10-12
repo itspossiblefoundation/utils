@@ -1,4 +1,4 @@
-import {AbstractStyle, BaseStyleLoader} from "./style";
+import {AbstractStyle, GenericStyleLoader, Style} from "./style";
 
 export class Red extends AbstractStyle {
     color(): string {
@@ -250,30 +250,60 @@ export class Olive extends AbstractStyle {
     }
 }
 
-export default {
-    Red: new Red,
-    Orange: new Orange,
-    Amber: new Amber,
-    Yellow: new Yellow,
-    Lime: new Lime,
-    Green: new Green,
-    Emerald: new Emerald,
-    Teal: new Teal,
-    Cyan: new Cyan,
-    Sky: new Sky,
-    Blue: new Blue,
-    Violet: new Violet,
-    Purple: new Purple,
-    Fuchsia: new Fuchsia,
-    Pink: new Pink,
-    Rose: new Rose,
-    Slate: new Slate,
-    Gray: new Gray,
-    Zinc: new Zinc,
-    Neutral: new Neutral,
-    Stone: new Stone,
-    Taupe: new Taupe,
-    Mauve: new Mauve,
-    Mist: new Mist,
-    Olive: new Olive,
-} satisfies BaseStyleLoader
+export enum TailwindStyles {
+    Red = 'Red',
+    Orange = 'Orange',
+    Amber = 'Amber',
+    Yellow = 'Yellow',
+    Lime = 'Lime',
+    Green = 'Green',
+    Emerald = 'Emerald',
+    Teal = 'Teal',
+    Cyan = 'Cyan',
+    Sky = 'Sky',
+    Blue = 'Blue',
+    Violet = 'Violet',
+    Purple = 'Purple',
+    Fuchsia = 'Fuchsia',
+    Pink = 'Pink',
+    Rose = 'Rose',
+    Slate = 'Slate',
+    Gray = 'Gray',
+    Zinc = 'Zinc',
+    Neutral = 'Neutral',
+    Stone = 'Stone',
+    Taupe = 'Taupe',
+    Mauve = 'Mauve',
+    Mist = 'Mist',
+    Olive = 'Olive',
+}
+
+export class TailwindStyleLoader implements GenericStyleLoader<TailwindStyles> {
+    Red: Style = new Red
+    Orange: Style = new Orange
+    Amber: Style = new Amber
+    Yellow: Style = new Yellow
+    Lime: Style = new Lime
+    Green: Style = new Green
+    Emerald: Style = new Emerald
+    Teal: Style = new Teal
+    Cyan: Style = new Cyan
+    Sky: Style = new Sky
+    Blue: Style = new Blue
+    Violet: Style = new Violet
+    Purple: Style = new Purple
+    Fuchsia: Style = new Fuchsia
+    Pink: Style = new Pink
+    Rose: Style = new Rose
+    Slate: Style = new Slate
+    Gray: Style = new Gray
+    Zinc: Style = new Zinc
+    Neutral: Style = new Neutral
+    Stone: Style = new Stone
+    Taupe: Style = new Taupe
+    Mauve: Style = new Mauve
+    Mist: Style = new Mist
+    Olive: Style = new Olive
+}
+
+export default new TailwindStyleLoader

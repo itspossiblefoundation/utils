@@ -1,4 +1,4 @@
-import {AbstractSize, BaseSizeLoader} from "./size";
+import {AbstractSize, GenericSizeLoader, Size} from "./size";
 
 export class XSmall extends AbstractSize {
     text: string = 'text-xs'
@@ -44,13 +44,26 @@ export class XXXLarge extends AbstractSize {
     padY: string = 'py-3'
 }
 
-export default {
-    Default: new Medium,
-    XSmall: new XSmall,
-    Small: new Small,
-    Medium: new Medium,
-    Large: new Large,
-    XLarge: new XLarge,
-    XXLarge: new XXLarge,
-    XXXLarge: new XXXLarge,
-} satisfies BaseSizeLoader
+export enum ButtonSizes {
+    Default = 'Default',
+    XSmall = 'XSmall',
+    Small = 'Small',
+    Medium = 'Medium',
+    Large = 'Large',
+    XLarge = 'XLarge',
+    XXLarge = 'XXLarge',
+    XXXLarge = 'XXXLarge',
+}
+
+export class ButtonSizeLoader implements GenericSizeLoader<ButtonSizes> {
+    Default: Size = new Medium
+    XSmall: Size = new XSmall
+    Small: Size = new Small
+    Medium: Size = new Medium
+    Large: Size = new Large
+    XLarge: Size = new XLarge
+    XXLarge: Size = new XXLarge
+    XXXLarge: Size = new XXXLarge
+}
+
+export default new ButtonSizeLoader
