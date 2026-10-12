@@ -1,14 +1,16 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.8"
+SCRIPT_VERSION="v0.2.9"
 
-URL=""
+REPO_URL=""
+ZIP_URL=""
 SKIP_REFRESH=false
 DIRECTORY="remote_resources"
 RENAME="latest"
 REMOTE_REPO_KEY="REMOTE_REPO"
 USE_SHARED_KEY="REMOTE_USE_SHARED"
 SHARED_FOLDER_KEY="REMOTE_SHARED_FOLDER"
+ZIP_URL_KEY="REMOTE_ZIP_URL"
 SYM_LINK_JS="external"
 POSITIONAL_ARGS=()
 
@@ -32,14 +34,15 @@ Key to load repository URL from in .env#-e#--env-key#Key name#"REMOTE_REPO"
 Refresh download script#-f#--refresh#(none)#Default behaviour
 Skip refreshing download script#-s#--skip-refresh#(none)#false
 Symlink JS#-l#--link#Link name#"external"
+Direct ZIP URL#-z#--zip-url#URL to ZIP Archive#(none)
 EOF
 }
 
-function get-env() {
+function get_env() {
   cat .env | grep "$1" | cut -f2- -d '='
 }
 
-function has-env() {
+function has_env() {
   if [[ "$(cat .env | grep "$1")" == "" ]]; then
     echo 0
   else
@@ -48,24 +51,49 @@ function has-env() {
 }
 
 function download() {
-  if [[ "$URL" == "" ]]; then
-    if [[ $(has-env "$REMOTE_REPO_KEY") == 0 ]]; then
+  download_url="$ZIP_URL"
+
+  if [[ "$download_url" == "" ]]; then
+    if [[ $(has_env "$ZIP_URL_KEY") == 1 ]]; then
+      download_url="$(get_env "$ZIP_URL_KEY")"
+    fi
+  fi
+
+  if [[ "$download_url" == "" ]]; then
+    download_release
+  else
+    download_zip "$download_url"
+  fi
+}
+
+function download_release() {
+  if [[ "$REPO_URL" == "" ]]; then
+    if [[ $(has_env "$REMOTE_REPO_KEY") == 0 ]]; then
         echo "Add $REMOTE_REPO_KEY to .env"
         exit 1
     fi
 
-    repo="$(get-env "$REMOTE_REPO_KEY")"
+    repo="$(get_env "$REMOTE_REPO_KEY")"
 
     if [[ "$repo" == "" ]]; then
         echo "$REMOTE_REPO_KEY in .env not set!"
         exit 1
     fi
   else
-    repo="$URL"
+    repo="$REPO_URL"
   fi
 
-  curl -sL "$repo" | grep "zipball_url" | cut -d ':' -f2-3 | tr -d '", ' | wget -q -O "$DIRECTORY/remote.zip" -i -
+  zip_url="$(curl -sL "$repo" | grep "zipball_url" | cut -d ':' -f2-3 | tr -d '", ')"
 
+  download_zip "$zip_url"
+}
+
+function download_zip() {
+  wget -q -O "$DIRECTORY/remote.zip" "$1"
+  extract_zip
+}
+
+function extract_zip() {
   name="$(unzip -l "$DIRECTORY/remote.zip" | grep -v 'Archive' | grep / | head -n1 | sed -e 's/^[ \t]*//g' | tr -s '[:space:]' | cut -d ' ' -f4 | cut -d '/' -f1)"
   unzip -q -o "$DIRECTORY/remote.zip" -d "$DIRECTORY"
 
@@ -77,13 +105,13 @@ function download() {
   rm "$DIRECTORY/remote.zip"
 }
 
-function link-shared() {
-  if [[ $(has-env "$SHARED_FOLDER_KEY") == 0 ]]; then
+function link_shared() {
+  if [[ $(has_env "$SHARED_FOLDER_KEY") == 0 ]]; then
     echo "Cannot find $SHARED_FOLDER_KEY in .env and trying to use shared folder."
     exit 1
   fi
 
-  folder="$(get-env "$SHARED_FOLDER_KEY")"
+  folder="$(get_env "$SHARED_FOLDER_KEY")"
 
   if [[ ! -d "$folder" ]]; then
     echo "$folder does not exist."
@@ -107,7 +135,7 @@ while [[ $# -gt 0 ]]; do
       exit 0
       ;;
     -u|--url)
-      URL="$2"
+      REPO_URL="$2"
       shift
       shift
       ;;
@@ -136,6 +164,11 @@ while [[ $# -gt 0 ]]; do
       ;;
     -l|--link)
       SYM_LINK_JS="$2"
+      shift
+      shift
+      ;;
+    -z|--zip-url)
+      ZIP_URL="$2"
       shift
       shift
       ;;
@@ -168,8 +201,8 @@ if [[ ! -d "$DIRECTORY" ]]; then
     fi
 fi
 
-if [[ "$(get-env "$USE_SHARED_KEY")" == "true" ]]; then
-  link-shared
+if [[ "$(get_env "$USE_SHARED_KEY")" == "true" ]]; then
+  link_shared
 else
   download
 fi
