@@ -10,7 +10,16 @@ export type {Style, StyleLoader, IPFStyles, BaseStyles, TailwindStyles}
 export type {Size, SizeLoader, ButtonSizes}
 export type {Loader}
 
-export class SupportLoader implements Loader<'Size' | 'Style', SizeLoader | StyleLoader> {
+enum Support {
+    size = 'size',
+    style = 'style',
+    Size = 'Size',
+    Style = 'Style',
+}
+
+export class SupportLoader implements Loader<Support, SizeLoader | StyleLoader> {
+    size: SizeLoader = new SizeLoader
+    style: StyleLoader = new StyleLoader
     Size: SizeLoader = new SizeLoader
     Style: StyleLoader = new StyleLoader
 }

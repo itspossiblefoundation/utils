@@ -218,3 +218,4 @@
 }
 
 @source '../js/**/*.ts';
+@source '../js/**/*.vue';
