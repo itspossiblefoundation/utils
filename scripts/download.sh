@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.2.9"
+SCRIPT_VERSION="v0.3.1"
 
 REPO_URL=""
 ZIP_URL=""
@@ -227,8 +227,27 @@ if [[ "$SKIP_REFRESH" == "false" ]]; then
     echo "rm download.sh" >> .cleanup.sh
     echo "cp \"$DIRECTORY/$RENAME/scripts/download.sh\" \"download.sh\"" >> .cleanup.sh
     echo "rm \".cleanup.sh\" & disown" >> .cleanup.sh
-    echo "exit 0" >> .cleanup.sh
+    echo "bash download.sh & disown"
+    echo "exit \$?" >> .cleanup.sh
     bash .cleanup.sh & disown
   fi
 fi
 
+if [[ "$(get_env "APP_ENV")" != "production" ]]; then
+  if [[ ! -f "origins.json" ]]; then
+    PORT=8000
+    mapfile -t IPS < <(ifconfig | grep -v inet6 | grep inet | grep -v 127.0.0.1 | awk '{print $2}')
+
+    netstat -tuln | grep ":$PORT" > /dev/null
+    code=$?
+
+    while [[ $code == 0 ]]; do
+      PORT=$((PORT+1))
+      netstat -tuln | grep ":$PORT" > /dev/null
+      code=$?
+    done
+
+    ORIGINS=$(printf "http://%s:$PORT\n" "${IPS[@]}" | jq -R . | jq -s . | jq -rc)
+    echo "{\"origins\":$ORIGINS}" | jq -r > origins.json
+  fi
+fi
