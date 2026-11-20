@@ -4,7 +4,7 @@ import {computed} from "vue";
 import {Fill, useLogo} from "../../composables/useLogo";
 
 const props = defineProps<ComponentProps>()
-const logo = useLogo({color: 'foundation'})
+const logo = useLogo({color: 'hub'})
 const post = computed<Fill>((): Fill => logo.color(props))
 const text = computed<Fill>((): Fill => logo.text(props))
 </script>

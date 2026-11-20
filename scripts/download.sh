@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="v0.3.1"
+SCRIPT_VERSION="v0.3.2"
 
 REPO_URL=""
 ZIP_URL=""
@@ -12,6 +12,7 @@ USE_SHARED_KEY="REMOTE_USE_SHARED"
 SHARED_FOLDER_KEY="REMOTE_SHARED_FOLDER"
 ZIP_URL_KEY="REMOTE_ZIP_URL"
 SYM_LINK_JS="external"
+NO_ORIGIN=false
 POSITIONAL_ARGS=()
 
 function version() {
@@ -123,6 +124,27 @@ function link_shared() {
   ln -s "$(realpath $folder)" "./$DIRECTORY/$RENAME"
 }
 
+function get_origins() {
+    if [[ "$(get_env "APP_ENV")" != "production" ]]; then
+      if [[ ! -f "origins.json" ]]; then
+        PORT=8000
+        mapfile -t IPS < <(ifconfig | grep -v inet6 | grep inet | grep -v 127.0.0.1 | awk '{print $2}')
+
+        netstat -tuln | grep ":$PORT" > /dev/null
+        code=$?
+
+        while [[ $code == 0 ]]; do
+          PORT=$((PORT+1))
+          netstat -tuln | grep ":$PORT" > /dev/null
+          code=$?
+        done
+
+        ORIGINS=$(printf "http://%s:$PORT\n" "${IPS[@]}" | jq -R . | jq -s . | jq -rc)
+        echo "{\"origins\":$ORIGINS}" | jq -r > origins.json
+      fi
+    fi
+}
+
 
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -170,6 +192,10 @@ while [[ $# -gt 0 ]]; do
     -z|--zip-url)
       ZIP_URL="$2"
       shift
+      shift
+      ;;
+    -N|--no-origin)
+      NO_ORIGIN=true
       shift
       ;;
     -*|--*)
@@ -233,21 +259,7 @@ if [[ "$SKIP_REFRESH" == "false" ]]; then
   fi
 fi
 
-if [[ "$(get_env "APP_ENV")" != "production" ]]; then
-  if [[ ! -f "origins.json" ]]; then
-    PORT=8000
-    mapfile -t IPS < <(ifconfig | grep -v inet6 | grep inet | grep -v 127.0.0.1 | awk '{print $2}')
-
-    netstat -tuln | grep ":$PORT" > /dev/null
-    code=$?
-
-    while [[ $code == 0 ]]; do
-      PORT=$((PORT+1))
-      netstat -tuln | grep ":$PORT" > /dev/null
-      code=$?
-    done
-
-    ORIGINS=$(printf "http://%s:$PORT\n" "${IPS[@]}" | jq -R . | jq -s . | jq -rc)
-    echo "{\"origins\":$ORIGINS}" | jq -r > origins.json
-  fi
+if [[ "$NO_ORIGIN" == "false" ]]; then
+    get_origins
 fi
+
